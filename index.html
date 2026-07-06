@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kwiaciarnia Flower Bar – Kostrzyn nad Odrą · Kwiaty i Kompozycje</title>
+    <meta name="description" content="Kwiaciarnia Flower Bar w Kostrzynie nad Odrą. Świeże kwiaty, piękne kompozycje na każdą okazję. Tel: 697 026 357" />
+    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/MkMg9NBt/624077542-1417617416818299-4101981846807032381-n.jpg" />
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
+
+      :root {
+        --ink: #1A1A18;
+        --ink-dark: #141412;
+        --text-2: #5A5A56;
+        --muted: #9A9A94;
+        --border: #E0E0DA;
+        --border-strong: #C8C8C0;
+        --page: #FAFAF8;
+        --surface: #FFFFFF;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--page);
+        color: var(--text-2);
+        font-family: 'Montserrat', sans-serif;
+        line-height: 1.76;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Typografia */
+      h1, h2, h3 {
+        color: var(--ink);
+        font-weight: normal;
+      }
+
+      .great-vibes {
+        font-family: 'Great Vibes', cursive;
+      }
+
+      .cormorant {
+        font-family: 'Cormorant Garamond', serif;
+      }
+
+      /* Klasy pomocnicze layoutu */
+      .section-padding {
+        padding: 88px 0;
+        position: relative;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+        position: relative;
+      }
+
+      .divider-line {
+        border: none;
+        border-top: 1px solid var(--border);
+        width: 100%;
+      }
+
+      /* SVG Wspólne */
+      .botanical-svg {
+        display: block;
+        margin: 0 auto;
+        pointer-events: none;
+      }
+
+      .rose-branch {
+        width: 80px;
+        height: 140px;
+        stroke: var(--ink);
+        stroke-width: 1.2;
+        fill: none;
+      }
+
+      .botanical-divider {
+        width: 240px;
+        height: 24px;
+        color: var(--ink);
+        margin: 16px auto;
+      }
+
+      .leaf-spray {
+        width: 60px;
+        height: 80px;
+        color: var(--ink);
+      }
+
+      .frame-corner {
+        width: 80px;
+        height: 80px;
+        color: var(--border-strong);
+        position: absolute;
+      }
+
+      /* 2. NAWIGACJA (sticky) */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(250, 250, 248, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        height: 72px;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+
+      .nav-logo-img {
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+      }
+
+      .nav-logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .nav-logo-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 1.5rem;
+        margin-bottom: -2px;
+      }
+
+      .nav-logo-subtitle {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .nav-link {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--ink);
+      }
+
+      .nav-cta {
+        border: 1px solid var(--ink);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        color: var(--ink);
+        padding: 8px 20px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .nav-cta:hover {
+        background: var(--ink);
+        color: var(--page);
+      }
+
+      /* Hamburger menu */
+      .nav-cb {
+        display: none;
+      }
+
+      .nav-burger {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--ink);
+        user-select: none;
+      }
+
+      /* 3. HERO */
+      .hero {
+        min-height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: var(--page);
+        overflow: hidden;
+      }
+
+      .hero-watermark-left {
+        position: absolute;
+        left: -40px;
+        top: 20%;
+        opacity: 0.05;
+        transform: rotate(-15deg) scale(2.5);
+        transform-origin: center;
+        pointer-events: none;
+      }
+
+      .hero-watermark-right {
+        position: absolute;
+        right: -40px;
+        bottom: 15%;
+        opacity: 0.05;
+        transform: rotate(15deg) scale(2.5);
+        transform-origin: center;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 780px;
+        padding: 40px 24px;
+        z-index: 2;
+      }
+
+      .hero-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .hero-title-box {
+        margin: 24px 0;
+      }
+
+      .hero-title-script {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        color: var(--ink);
+        line-height: 1;
+        margin-bottom: -15px;
+      }
+
+      .hero-title-serif {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 300;
+        font-style: italic;
+        font-size: clamp(3.2rem, 9vw, 7.5rem);
+        color: var(--ink);
+        line-height: 0.9;
+        letter-spacing: 0.02em;
+      }
+
+      .hero-tagline {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 1.3rem;
+        color: var(--text-2);
+        max-width: 520px;
+        margin: 24px auto 40px;
+        line-height: 1.6;
+      }
+
+      .hero-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .hero-btn-primary {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .hero-btn-primary:hover {
+        letter-spacing: 0.18em;
+        border-bottom-color: transparent;
+      }
+
+      .hero-btn-secondary {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .hero-btn-secondary:hover {
+        color: var(--ink);
+      }
+
+      .hero-chips-line {
+        border-top: 1px solid var(--border);
+        padding-top: 24px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .hero-chip-item {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 0.78rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .hero-chip-item:hover {
+        color: var(--ink);
+      }
+
+      .hero-chip-sep {
+        color: var(--border-strong);
+        user-select: none;
+      }
+
+      /* 4. ABOUT SECTION (O NAS) */
+      .about-section {
+        background-color: var(--ink-dark);
+        color: rgba(250, 250, 248, 0.6);
+      }
+
+      .about-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        display: block;
+      }
+
+      .about-divider {
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      .about-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--page);
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .about-body {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        max-width: 680px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .about-body p {
+        margin-bottom: 24px;
+      }
+
+      .about-chips {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 40px 0;
+      }
+
+      .about-chip {
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 10px 24px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 0.82rem;
+        color: rgba(250, 250, 248, 0.75);
+        letter-spacing: 0.05em;
+      }
+
+      .about-contact-box {
+        text-align: center;
+        margin-top: 48px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 32px;
+      }
+
+      .about-contact-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.3);
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .about-contact-phone {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 2.2rem;
+        color: var(--page);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .about-contact-phone:hover {
+        color: rgba(250, 250, 248, 0.7);
+      }
+
+      /* 5. GALLERY SECTION */
+      .gallery-section {
+        background-color: var(--page);
+      }
+
+      .gallery-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: center;
+        display: block;
+      }
+
+      .gallery-title-wrapper {
+        position: relative;
+        max-width: 450px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .gallery-title-wrapper .frame-corner-tl {
+        top: -12px;
+        left: -12px;
+      }
+
+      .gallery-title-wrapper .frame-corner-tr {
+        top: -12px;
+        right: -12px;
+        transform: scaleX(-1);
+      }
+
+      .gallery-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--ink);
+        padding: 12px 24px;
+      }
+
+      .gallery-tagline {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--muted);
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      /* Expandable Gallery Grid (Pure CSS) */
+      .gallery-cb {
+        display: none;
+      }
+
+      .gallery-grid {
+        column-count: 4;
+        column-gap: 8px;
+        width: 100%;
+        margin-top: 36px;
+      }
+
+      .gallery-item {
+        margin-bottom: 8px;
+        break-inside: avoid;
+        width: 100%;
+        display: block;
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .gallery-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: all 0.2s ease;
+      }
+
+      .gallery-item:hover .gallery-img {
+        opacity: 0.88;
+        outline: 2px solid var(--ink);
+        outline-offset: -2px;
+      }
+
+      .gallery-extra {
+        display: none !important;
+      }
+
+      .gallery-cb:checked ~ .gallery-grid .gallery-extra {
+        display: block !important;
+      }
+
+      /* Przycisk Pokaż więcej / Zwiń */
+      .gallery-toggle {
+        display: block;
+        margin: 40px auto 0;
+        width: fit-content;
+        border: 1px solid var(--ink);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 14px 36px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        user-select: none;
+        background: transparent;
+        color: var(--ink);
+      }
+
+      .gallery-toggle:hover {
+        background: var(--ink);
+        color: var(--page);
+      }
+
+      .toggle-less {
+        display: none;
+      }
+
+      .gallery-cb:checked ~ .gallery-toggle .toggle-more {
+        display: none;
+      }
+
+      .gallery-cb:checked ~ .gallery-toggle .toggle-less {
+        display: block;
+      }
+
+      /* 6. REVIEWS SECTION (OPINIE) */
+      .reviews-section {
+        background-color: var(--ink-dark);
+        color: rgba(250, 250, 248, 0.7);
+      }
+
+      .reviews-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        text-align: center;
+        display: block;
+      }
+
+      .reviews-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--page);
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .reviews-grid {
+        display: flex;
+        gap: 0;
+        margin-bottom: 48px;
+      }
+
+      .review-block {
+        flex: 1;
+        padding: 0 32px;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+      }
+
+      .review-block:first-child {
+        border-left: none;
+        padding-left: 0;
+      }
+
+      .review-block:last-child {
+        padding-right: 0;
+      }
+
+      .review-quote-icon {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 6rem;
+        line-height: 0.7;
+        color: rgba(255, 255, 255, 0.08);
+        position: absolute;
+        top: -10px;
+        left: 16px;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .review-quote {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        line-height: 1.72;
+        color: rgba(250, 250, 248, 0.85);
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .review-stars {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 8px;
+      }
+
+      .review-author {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      .reviews-more {
+        display: block;
+        width: fit-content;
+        margin: 40px auto 0;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        padding-bottom: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .reviews-more:hover {
+        color: var(--page);
+        border-bottom-color: var(--page);
+      }
+
+      /* 7. CONTACT SECTION */
+      .contact-section {
+        background-color: var(--page);
+      }
+
+      .contact-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: center;
+        display: block;
+      }
+
+      .contact-title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .contact-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--ink);
+        text-align: center;
+      }
+
+      .contact-grid {
+        display: flex;
+        gap: 64px;
+        margin-top: 48px;
+      }
+
+      .contact-left {
+        flex: 1;
+      }
+
+      .contact-desc {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 0.95rem;
+        color: var(--text-2);
+        margin-bottom: 32px;
+        line-height: 1.7;
+      }
+
+      .contact-row {
+        border-bottom: 1px solid var(--border);
+        padding: 18px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .contact-row-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .contact-row-value {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 0.95rem;
+        color: var(--text-2);
+        text-decoration: none;
+      }
+
+      .contact-row-value.phone {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--ink);
+        transition: color 0.2s ease;
+      }
+
+      .contact-row-value.phone:hover {
+        text-decoration: underline;
+      }
+
+      .contact-row-value.link {
+        font-weight: 500;
+        color: var(--ink);
+        transition: color 0.2s;
+      }
+
+      .contact-row-value.link:hover {
+        text-decoration: underline;
+      }
+
+      .contact-cta {
+        display: block;
+        width: 100%;
+        border: 1.5px solid var(--ink);
+        background: transparent;
+        color: var(--ink);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 14px 32px;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 24px;
+        transition: all 0.2s ease;
+      }
+
+      .contact-cta:hover {
+        background: var(--ink);
+        color: var(--page);
+      }
+
+      .contact-right {
+        flex: 1;
+      }
+
+      .map-wrapper {
+        width: 100%;
+        height: 360px;
+        border: 1px solid var(--border);
+      }
+
+      /* 8. FOOTER */
+      .footer {
+        background-color: var(--page);
+        border-top: 1px solid var(--border);
+        padding: 48px 0;
+        position: relative;
+        text-align: center;
+      }
+
+      .footer-watermark {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.03;
+        pointer-events: none;
+      }
+
+      .footer-logo {
+        text-decoration: none;
+        color: var(--ink);
+        display: inline-block;
+        margin-bottom: 12px;
+      }
+
+      .footer-logo-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 2.2rem;
+        line-height: 1;
+      }
+
+      .footer-logo-subtitle {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 1rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+
+      .footer-details {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 0.78rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        margin-top: 8px;
+      }
+
+      .footer-copyright {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        font-size: 0.72rem;
+        color: var(--border-strong);
+        margin-top: 12px;
+      }
+
+      /* --- MEDIA QUERIES --- */
+      @media (max-width: 1024px) {
+        .gallery-grid {
+          column-count: 3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section-padding {
+          padding: 64px 0;
+        }
+
+        /* Nav Mobile */
+        .nav-burger {
+          display: block;
+          z-index: 101;
+        }
+
+        .nav-links {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: var(--page);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 32px;
+          z-index: 99;
+        }
+
+        .nav-cb:checked ~ .nav-links {
+          display: flex;
+        }
+
+        .nav-cta-wrapper {
+          display: none;
+        }
+
+        /* Hero */
+        .hero {
+          min-height: 85vh;
+        }
+
+        .hero-watermark-left,
+        .hero-watermark-right {
+          transform: scale(1.6);
+        }
+
+        /* Layout columns wrap */
+        .reviews-grid {
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .review-block {
+          border-left: none;
+          padding: 0;
+        }
+
+        .contact-grid {
+          flex-direction: column;
+          gap: 48px;
+        }
+
+        .map-wrapper {
+          height: 320px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .gallery-grid {
+          column-count: 2;
+        }
+
+        .about-chip {
+          padding: 8px 16px;
+          font-size: 0.76rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          gap: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- 2. NAVIGATION (sticky) -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-text">
+            <span class="nav-logo-title">Kwiaciarnia</span>
+            <span class="nav-logo-subtitle">Flower Bar</span>
+          </div>
+        </a>
+
+        <input type="checkbox" id="nav-open" class="nav-cb" />
+        <label for="nav-open" class="nav-burger">≡</label>
+
+        <nav class="nav-links">
+          <a href="#galeria" class="nav-link" onclick="document.getElementById('nav-open').checked = false">Galeria</a>
+          <a href="#opinie" class="nav-link" onclick="document.getElementById('nav-open').checked = false">Opinie</a>
+          <a href="#kontakt" class="nav-link" onclick="document.getElementById('nav-open').checked = false">Kontakt</a>
+        </nav>
+
+        <div class="nav-cta-wrapper">
+          <a href="tel:697026357" class="nav-cta">ZADZWOŃ</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 3. HERO -->
+    <section class="hero">
+      <!-- Watermarks Left and Right -->
+      <div class="hero-watermark-left">
+        <svg viewBox="0 0 100 160" fill="none" class="rose-branch">
+          <path d="M50,145 C48,110 52,75 48,45 C47,38 48,34 50,30" stroke-linecap="round" />
+          <path d="M49,115 C45,114 43,115 42,116 M51,95 C55,94 57,95 58,96 M48,75 C44,74 42,75 41,76" stroke-width="1" stroke-linecap="round" />
+          <path d="M49,105 C35,102 28,90 32,80 C38,80 43,90 49,95 Z" stroke-linecap="round" />
+          <path d="M32,80 C38,86 43,92 49,95" stroke-width="0.8" stroke-linecap="round" />
+          <path d="M50,85 C64,82 71,70 67,60 C61,60 56,70 50,75 Z" stroke-linecap="round" />
+          <path d="M67,60 C61,66 56,72 50,75" stroke-width="0.8" stroke-linecap="round" />
+          <path d="M50,30 C38,28 36,15 50,8 C64,15 62,28 50,30 Z" stroke-linecap="round" />
+          <path d="M45,22 C40,15 48,11 50,14 C52,11 60,15 55,22" stroke-width="1" stroke-linecap="round" />
+          <path d="M48,26 C43,24 45,18 48,19 C51,18 53,24 48,26 Z" stroke-width="1" stroke-linecap="round" />
+          <path d="M41,20 C42,25 48,28 50,28 C52,28 58,25 59,20" stroke-width="1" stroke-linecap="round" />
+          <path d="M46,32 C42,36 44,40 45,42 M54,32 C58,36 56,40 55,42 M50,32 C50,38 49,41 50,43" stroke-width="1" stroke-linecap="round" />
+        </svg>
+      </div>
+      <div class="hero-watermark-right">
+        <svg viewBox="0 0 100 160" fill="none" class="rose-branch">
+          <path d="M50,145 C48,110 52,75 48,45 C47,38 48,34 50,30" stroke-linecap="round" />
+          <path d="M49,115 C45,114 43,115 42,116 M51,95 C55,94 57,95 58,96 M48,75 C44,74 42,75 41,76" stroke-width="1" stroke-linecap="round" />
+          <path d="M49,105 C35,102 28,90 32,80 C38,80 43,90 49,95 Z" stroke-linecap="round" />
+          <path d="M32,80 C38,86 43,92 49,95" stroke-width="0.8" stroke-linecap="round" />
+          <path d="M50,85 C64,82 71,70 67,60 C61,60 56,70 50,75 Z" stroke-linecap="round" />
+          <path d="M67,60 C61,66 56,72 50,75" stroke-width="0.8" stroke-linecap="round" />
+          <path d="M50,30 C38,28 36,15 50,8 C64,15 62,28 50,30 Z" stroke-linecap="round" />
+          <path d="M45,22 C40,15 48,11 50,14 C52,11 60,15 55,22" stroke-width="1" stroke-linecap="round" />
+          <path d="M48,26 C43,24 45,18 48,19 C51,18 53,24 48,26 Z" stroke-width="1" stroke-linecap="round" />
+          <path d="M41,20 C42,25 48,28 50,28 C52,28 58,25 59,20" stroke-width="1" stroke-linecap="round" />
+          <path d="M46,32 C42,36 44,40 45,42 M54,32 C58,36 56,40 55,42 M50,32 C50,38 49,41 50,43" stroke-width="1" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-label">Kostrzyn nad Odrą · ul. Gorzowska 22a</span>
+        
+        <!-- Botanical Divider -->
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <div class="hero-title-box">
+          <div class="hero-title-script">Kwiaciarnia</div>
+          <div class="hero-title-serif">Flower Bar</div>
+        </div>
+
+        <!-- Botanical Divider -->
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <p class="hero-tagline">Świeże kwiaty. Piękne kompozycje. Serce włożone w każdy bukiet.</p>
+
+        <div class="hero-actions">
+          <a href="#galeria" class="hero-btn-primary">→ Galeria</a>
+          <a href="#kontakt" class="hero-btn-secondary">· Kontakt</a>
+        </div>
+
+        <div class="hero-chips-line">
+          <a href="tel:697026357" class="hero-chip-item">697 026 357</a>
+          <span class="hero-chip-sep">·</span>
+          <span class="hero-chip-item">Gorzowska 22a, Kostrzyn</span>
+          <span class="hero-chip-sep">·</span>
+          <span class="hero-chip-item">Facebook & Instagram</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider-line" />
+
+    <!-- 4. ABOUT SECTION (O NAS) -->
+    <section class="about-section section-padding">
+      <div class="container">
+        <!-- Leaf Spray Corner Ornaments -->
+        <div style="position: absolute; left: 0; top: 0; opacity: 0.08;">
+          <svg viewBox="0 0 60 80" class="leaf-spray">
+            <path d="M30,75 C29,55 31,35 30,25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M30,25 C23,18 25,5 30,2 C35,5 37,18 30,25 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+            <path d="M30,25 C30,17 30,10 30,2" stroke="currentColor" stroke-width="0.8" />
+            <path d="M30,75 Q18,60 15,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M15,50 C8,45 6,32 13,26 C20,30 20,43 15,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+            <path d="M15,50 C16,42 16,35 13,26" stroke="currentColor" stroke-width="0.8" />
+            <path d="M30,75 Q42,60 45,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M45,50 C52,45 54,32 47,26 C40,30 40,43 45,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+            <path d="M45,50 C44,42 44,35 47,26" stroke="currentColor" stroke-width="0.8" />
+          </svg>
+        </div>
+        <div style="position: absolute; right: 0; bottom: 0; opacity: 0.08; transform: rotate(180deg);">
+          <svg viewBox="0 0 60 80" class="leaf-spray">
+            <path d="M30,75 C29,55 31,35 30,25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M30,25 C23,18 25,5 30,2 C35,5 37,18 30,25 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+            <path d="M30,25 C30,17 30,10 30,2" stroke="currentColor" stroke-width="0.8" />
+            <path d="M30,75 Q18,60 15,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M15,50 C8,45 6,32 13,26 C20,30 20,43 15,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+            <path d="M15,50 C16,42 16,35 13,26" stroke="currentColor" stroke-width="0.8" />
+            <path d="M30,75 Q42,60 45,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M45,50 C52,45 54,32 47,26 C40,30 40,43 45,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+            <path d="M45,50 C44,42 44,35 47,26" stroke="currentColor" stroke-width="0.8" />
+          </svg>
+        </div>
+
+        <span class="about-label">O nas</span>
+        
+        <!-- White Botanical Divider -->
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider about-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <h2 class="about-title">Kwiaty z pasją.</h2>
+
+        <div class="about-body">
+          <p>Kwiaciarnia Flower Bar w Kostrzynie nad Odrą to urokliwe miejsce stworzone przez Panią Martę Szeleszkiewicz, gdzie pasja do florystyki łączy się z najwyższym standardem obsługi.</p>
+          <p>Tworzymy niepowtarzalne kompozycje na każdą okazję — od delikatnych, codziennych upominków, przez spektakularne bukiety ślubne, aż po oprawę florystyczną uroczystości i wydarzeń. Dbamy o to, by każdy pojedynczy płatek i gałązka opowiadały wyjątkową historię.</p>
+        </div>
+
+        <div class="about-chips">
+          <div class="about-chip">🌹 Kompozycje na zamówienie</div>
+          <div class="about-chip">💐 Śluby i uroczystości</div>
+          <div class="about-chip">🌿 Świeże kwiaty</div>
+        </div>
+
+        <div class="about-contact-box">
+          <span class="about-contact-label">KONTAKT</span>
+          <a href="tel:697026357" class="about-contact-phone">697 026 357</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GALLERY SECTION -->
+    <section id="galeria" class="gallery-section section-padding">
+      <div class="container">
+        <span class="gallery-label">Galeria</span>
+        
+        <div class="gallery-title-wrapper">
+          <!-- Frame corners top left and top right -->
+          <svg viewBox="0 0 100 100" class="frame-corner frame-corner-tl">
+            <path d="M5,95 L5,5 L95,5" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none" />
+            <circle cx="5" cy="5" r="2.5" fill="currentColor" />
+            <path d="M2,5 C0,0 10,0 8,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M25,5 C25,2 32,1 35,5 C32,9 25,8 25,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M50,5 C50,1 55,-1 58,5 C55,8 50,8 50,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M75,5 C75,2 82,1 85,5 C82,9 75,8 75,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M5,25 C2,25 1,32 5,35 C9,32 8,25 5,25 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M5,50 C1,50 -1,55 5,58 C8,55 8,50 5,50 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M5,75 C2,75 1,82 5,85 C9,82 8,75 5,75 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+          </svg>
+          <svg viewBox="0 0 100 100" class="frame-corner frame-corner-tr">
+            <path d="M5,95 L5,5 L95,5" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none" />
+            <circle cx="5" cy="5" r="2.5" fill="currentColor" />
+            <path d="M2,5 C0,0 10,0 8,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M25,5 C25,2 32,1 35,5 C32,9 25,8 25,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M50,5 C50,1 55,-1 58,5 C55,8 50,8 50,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M75,5 C75,2 82,1 85,5 C82,9 75,8 75,5 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M5,25 C2,25 1,32 5,35 C9,32 8,25 5,25 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M5,50 C1,50 -1,55 5,58 C8,55 8,50 5,50 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+            <path d="M5,75 C2,75 1,82 5,85 C9,82 8,75 5,75 Z" stroke="currentColor" stroke-width="0.8" fill="none" />
+          </svg>
+
+          <h2 class="gallery-title">Nasze kompozycje</h2>
+        </div>
+
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <p class="gallery-tagline">Każdy bukiet to osobna historia</p>
+
+        <!-- CSS Only Expandable Gallery Hack -->
+        <input type="checkbox" id="gallery-expand" class="gallery-cb" />
+
+        <div class="gallery-grid">
+          <!-- 1-8: Always visible -->
+          <div class="gallery-item"><img src="https://i.ibb.co/m59hSYwp/673625925-1481138947132812-4770497051028341590-n.jpg" alt="Flower composition 1" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/DDhb08Yx/671777337-1481139010466139-8546070585959303916-n.jpg" alt="Flower composition 2" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/n8KGfMdc/690684959-1498606622052711-8361116883592690525-n.jpg" alt="Flower composition 3" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/VPxdmft/690996815-1499077978672242-185458927302600025-n.jpg" alt="Flower composition 4" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/k2RY5bHB/690633292-1500168715229835-2910511913654894973-n.jpg" alt="Flower composition 5" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/spRB2jCt/692329562-1500168755229831-7754115931865421696-n.jpg" alt="Flower composition 6" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/VWfMjm0q/690685777-1500168745229832-7446741946472221838-n.jpg" alt="Flower composition 7" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><img src="https://i.ibb.co/rGrtGzMZ/690664692-1500161311897242-1170510835153177484-n.jpg" alt="Flower composition 8" class="gallery-img" loading="lazy" /></div>
+
+          <!-- 9-34: Hidden until expanded (class="gallery-extra") -->
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/ZRfXFtQj/690747196-1500718401841533-2590570400693785980-n.jpg" alt="Flower composition 9" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/DH9pWm9R/696533044-1503542048225835-1311061857064469698-n.jpg" alt="Flower composition 10" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/xtb12cgZ/696941236-1503542058225834-8317735193711663566-n.jpg" alt="Flower composition 11" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/jngpxjw/701437165-1506587167921323-345156310280281627-n.jpg" alt="Flower composition 12" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/vC1tmFQq/701173709-1506587224587984-7954611724330798781-n.jpg" alt="Flower composition 13" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/4wszf7q9/701292855-1506587314587975-8971269090885029357-n.jpg" alt="Flower composition 14" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/ynBR4MjV/701056290-1506587137921326-507565786551534719-n.jpg" alt="Flower composition 15" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/WQKQJwK/704801770-1510453820867991-8144160738459324492-n.jpg" alt="Flower composition 16" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/r2cRBjqw/704507125-1510957734150933-4565255399389898716-n.jpg" alt="Flower composition 17" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/x8RbqqHF/704851691-1510956267484413-5069367878195772634-n.jpg" alt="Flower composition 18" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/TDC3cVgP/705878425-1511252760788097-8420948546502386759-n.jpg" alt="Flower composition 19" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/0pGyvXfZ/705341477-1511252770788096-5329352756437704626-n.jpg" alt="Flower composition 20" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/DN0kn63/705298708-1511251304121576-2630863170677265268-n.jpg" alt="Flower composition 21" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/YBrKZv1q/707561402-1516150330298340-6455755458922446356-n.jpg" alt="Flower composition 22" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/KjMytCDZ/707561398-1516150336965006-4062354868542350324-n.jpg" alt="Flower composition 23" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/KtyfXmD/719993163-1526194335960606-7691637487309658761-n.jpg" alt="Flower composition 24" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/hxYLGBfL/719189581-1526194342627272-860845658635347139-n.jpg" alt="Flower composition 25" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/sJc9cRxk/729167994-1539849157928457-2799154154500316734-n.jpg" alt="Flower composition 26" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/GQBHXmW0/728597880-1539849164595123-4291811548964572311-n.jpg" alt="Flower composition 27" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/VWz32HC9/729115825-1539849191261787-2327039707176743458-n.jpg" alt="Flower composition 28" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/jPvxWTN7/729100650-1539849217928451-6959825167334777907-n.jpg" alt="Flower composition 29" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/XZs8m7nF/729016116-1541361761110530-6157787380783126411-n.jpg" alt="Flower composition 30" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/dwWz1JPx/731843770-1541351884444851-7987032143946935899-n.jpg" alt="Flower composition 31" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/9kpNqBF6/737297570-1548653493714690-3385449930314199352-n.jpg" alt="Flower composition 32" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/whkH2V6R/735456845-1548653380381368-7467488387054346488-n.jpg" alt="Flower composition 33" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/spy7x16h/734896675-1548653713714668-2868512842852011399-n.jpg" alt="Flower composition 34" class="gallery-img" loading="lazy" /></div>
+        </div>
+
+        <label for="gallery-expand" class="gallery-toggle">
+          <span class="toggle-more">Pokaż wszystkie (34) ↓</span>
+          <span class="toggle-less">Zwiń galerię ↑</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- 6. REVIEWS SECTION (OPINIE) -->
+    <section id="opinie" class="reviews-section section-padding">
+      <div class="container">
+        <span class="reviews-label">Opinie</span>
+        
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider about-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <h2 class="reviews-title">Co mówią klientki</h2>
+
+        <div class="reviews-grid">
+          <!-- Review 1 -->
+          <div class="review-block">
+            <div class="review-quote-icon">“</div>
+            <p class="review-quote">Wspaniała kwiaciarnia! Zawsze będę polecała! Uwielbiam kwiaty od Pani Marty ❤️❤️❤️</p>
+            <div class="review-stars">★★★★★</div>
+            <span class="review-author">— Klientka</span>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-block">
+            <div class="review-quote-icon">“</div>
+            <p class="review-quote">Cudowne, świeże kwiaty! Mega polecam!</p>
+            <div class="review-stars">★★★★★</div>
+            <span class="review-author">— Klientka</span>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-block">
+            <div class="review-quote-icon">“</div>
+            <p class="review-quote">Polecam z całego serca. Przepiękne kompozycje. Bardzo miła i profesjonalna obsługa.</p>
+            <div class="review-stars">★★★★★</div>
+            <span class="review-author">— Klientka</span>
+          </div>
+        </div>
+
+        <a href="https://www.facebook.com/profile.php?id=100057101633609&sk=reviews" target="_blank" class="reviews-more">Więcej opinii na Facebooku →</a>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="kontakt" class="contact-section section-padding">
+      <div class="container">
+        <span class="contact-label">Kontakt</span>
+        
+        <div class="contact-title-container">
+          <div style="opacity: 0.2;">
+            <svg viewBox="0 0 60 80" class="leaf-spray">
+              <path d="M30,75 C29,55 31,35 30,25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M30,25 C23,18 25,5 30,2 C35,5 37,18 30,25 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+              <path d="M30,25 C30,17 30,10 30,2" stroke="currentColor" stroke-width="0.8" />
+              <path d="M30,75 Q18,60 15,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M15,50 C8,45 6,32 13,26 C20,30 20,43 15,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+              <path d="M15,50 C16,42 16,35 13,26" stroke="currentColor" stroke-width="0.8" />
+              <path d="M30,75 Q42,60 45,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M45,50 C52,45 54,32 47,26 C40,30 40,43 45,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+              <path d="M45,50 C44,42 44,35 47,26" stroke="currentColor" stroke-width="0.8" />
+            </svg>
+          </div>
+          <h2 class="contact-title">Odwiedź nas.</h2>
+          <div style="opacity: 0.2; transform: scaleX(-1);">
+            <svg viewBox="0 0 60 80" class="leaf-spray">
+              <path d="M30,75 C29,55 31,35 30,25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M30,25 C23,18 25,5 30,2 C35,5 37,18 30,25 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+              <path d="M30,25 C30,17 30,10 30,2" stroke="currentColor" stroke-width="0.8" />
+              <path d="M30,75 Q18,60 15,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M15,50 C8,45 6,32 13,26 C20,30 20,43 15,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+              <path d="M15,50 C16,42 16,35 13,26" stroke="currentColor" stroke-width="0.8" />
+              <path d="M30,75 Q42,60 45,50" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M45,50 C52,45 54,32 47,26 C40,30 40,43 45,50 Z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" />
+              <path d="M45,50 C44,42 44,35 47,26" stroke="currentColor" stroke-width="0.8" />
+            </svg>
+          </div>
+        </div>
+
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <div class="contact-grid">
+          <!-- Contact Left -->
+          <div class="contact-left">
+            <p class="contact-desc">Zapraszamy do Kwiaciarni Flower Bar w Kostrzynie nad Odrą. Zadzwoń, napisz lub odwiedź nas na Facebooku i Instagramie.</p>
+            
+            <div class="contact-row">
+              <span class="contact-row-label">Telefon</span>
+              <a href="tel:697026357" class="contact-row-value phone">697 026 357</a>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-row-label">Adres</span>
+              <span class="contact-row-value">ul. Gorzowska 22a, Kostrzyn nad Odrą</span>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-row-label">Facebook</span>
+              <a href="https://www.facebook.com/profile.php?id=100057101633609" target="_blank" class="contact-row-value link">Flower Bar →</a>
+            </div>
+
+            <div class="contact-row">
+              <span class="contact-row-label">Instagram</span>
+              <a href="https://www.instagram.com/m.szeleszkiewicz/" target="_blank" class="contact-row-value link">m.szeleszkiewicz →</a>
+            </div>
+
+            <a href="tel:697026357" class="contact-cta">ZADZWOŃ: 697 026 357</a>
+          </div>
+
+          <!-- Contact Right -->
+          <div class="contact-right">
+            <div class="map-wrapper">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2423.8471196194955!2d14.65616371269109!3d52.590457230893776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47077314f6e0a47d%3A0xbafd5ca1cf843150!2sGorzowska%2022a%2C%2066-470%20Kostrzyn%20nad%20Odr%C4%85!5e0!3m2!1spl!2spl!4v1783317151059!5m2!1spl!2spl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <!-- Botanical Watermark background -->
+        <div class="footer-watermark">
+          <svg viewBox="0 0 100 160" fill="none" class="rose-branch" style="opacity: 0.04;">
+            <path d="M50,145 C48,110 52,75 48,45 C47,38 48,34 50,30" stroke-linecap="round" />
+            <path d="M49,115 C45,114 43,115 42,116 M51,95 C55,94 57,95 58,96 M48,75 C44,74 42,75 41,76" stroke-width="1" stroke-linecap="round" />
+            <path d="M49,105 C35,102 28,90 32,80 C38,80 43,90 49,95 Z" stroke-linecap="round" />
+            <path d="M32,80 C38,86 43,92 49,95" stroke-width="0.8" stroke-linecap="round" />
+            <path d="M50,85 C64,82 71,70 67,60 C61,60 56,70 50,75 Z" stroke-linecap="round" />
+            <path d="M67,60 C61,66 56,72 50,75" stroke-width="0.8" stroke-linecap="round" />
+            <path d="M50,30 C38,28 36,15 50,8 C64,15 62,28 50,30 Z" stroke-linecap="round" />
+            <path d="M45,22 C40,15 48,11 50,14 C52,11 60,15 55,22" stroke-width="1" stroke-linecap="round" />
+            <path d="M48,26 C43,24 45,18 48,19 C51,18 53,24 48,26 Z" stroke-width="1" stroke-linecap="round" />
+            <path d="M41,20 C42,25 48,28 50,28 C52,28 58,25 59,20" stroke-width="1" stroke-linecap="round" />
+            <path d="M46,32 C42,36 44,40 45,42 M54,32 C58,36 56,40 55,42 M50,32 C50,38 49,41 50,43" stroke-width="1" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <a href="#" class="footer-logo">
+          <div class="footer-logo-title great-vibes">Kwiaciarnia</div>
+          <div class="footer-logo-subtitle cormorant">Flower Bar</div>
+        </a>
+
+        <!-- Botanical Divider -->
+        <svg viewBox="0 0 240 24" fill="none" class="botanical-divider">
+          <line x1="10" y1="12" x2="100" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+          <g stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round">
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(0 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(72 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(144 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(216 120 12)" />
+            <ellipse cx="120" cy="12" rx="4" ry="2.2" transform="rotate(288 120 12)" />
+            <circle cx="120" cy="12" r="1" fill="currentColor" />
+          </g>
+          <line x1="140" y1="12" x2="230" y2="12" stroke="currentColor" stroke-width="1" stroke-linecap="round" />
+        </svg>
+
+        <p class="footer-details">ul. Gorzowska 22a · Kostrzyn nad Odrą · 697 026 357</p>
+        <p class="footer-copyright">© 2026 Kwiaciarnia Flower Bar</p>
+      </div>
+    </footer>
+
+  </body>
+</html>

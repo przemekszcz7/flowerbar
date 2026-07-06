@@ -1,0 +1,6 @@
+{
+  "name": "Kwiaciarnia Flower Bar",
+  "description": "Kwiaciarnia Flower Bar w Kostrzynie nad Odrą. Świeże kwiaty, piękne kompozycje na każdą okazję.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

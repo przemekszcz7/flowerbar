@@ -113,8 +113,7 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        background: rgba(250, 250, 248, 0.96);
-        backdrop-filter: blur(12px);
+        background: #FAFAF8;
         border-bottom: 1px solid var(--border);
         height: 72px;
       }
@@ -212,6 +211,18 @@
         cursor: pointer;
         color: var(--ink);
         user-select: none;
+      }
+
+      .burger-close {
+        display: none;
+      }
+
+      .nav-cb:checked ~ .nav-burger .burger-open {
+        display: none;
+      }
+
+      .nav-cb:checked ~ .nav-burger .burger-close {
+        display: inline;
       }
 
       /* 3. HERO */
@@ -512,33 +523,38 @@
       }
 
       .gallery-grid {
-        column-count: 4;
-        column-gap: 8px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
         width: 100%;
         margin-top: 36px;
       }
 
       .gallery-item {
-        margin-bottom: 8px;
-        break-inside: avoid;
         width: 100%;
-        display: block;
-        transition: all 0.3s ease;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
         position: relative;
         cursor: pointer;
       }
 
+      .gallery-item a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
       .gallery-img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
         display: block;
-        transition: all 0.2s ease;
+        transition: transform 0.3s ease, opacity 0.2s ease;
       }
 
       .gallery-item:hover .gallery-img {
-        opacity: 0.88;
-        outline: 2px solid var(--ink);
-        outline-offset: -2px;
+        transform: scale(1.05);
+        opacity: 0.92;
       }
 
       .gallery-extra {
@@ -883,10 +899,82 @@
         margin-top: 12px;
       }
 
+      /* --- LIGHTBOX (Pure HTML/CSS zoom on click) --- */
+      .lightbox-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 20, 18, 0.97);
+        z-index: 2000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox-overlay:target {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .lightbox-close-zone {
+        position: absolute;
+        inset: 0;
+        cursor: zoom-out;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        z-index: 2001;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox-img {
+        max-width: 100%;
+        max-height: 85vh;
+        object-fit: contain;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transform: scale(0.95);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .lightbox-overlay:target .lightbox-img {
+        transform: scale(1);
+      }
+
+      .lightbox-close-btn {
+        position: absolute;
+        top: -44px;
+        right: 0;
+        color: #FAFAF8;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        text-decoration: none;
+        transition: color 0.2s;
+        z-index: 2002;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .lightbox-close-btn:hover {
+        color: var(--border-strong);
+      }
+
       /* --- MEDIA QUERIES --- */
       @media (max-width: 1024px) {
         .gallery-grid {
-          column-count: 3;
+          grid-template-columns: repeat(3, 1fr);
         }
       }
 
@@ -899,10 +987,11 @@
         .nav-burger {
           display: block;
           z-index: 101;
+          position: relative; /* Fixed: allows z-index to place it over the overlay */
         }
 
         .nav-links {
-          display: none;
+          display: flex;
           position: fixed;
           inset: 0;
           background: var(--page);
@@ -911,10 +1000,37 @@
           align-items: center;
           gap: 32px;
           z-index: 99;
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-20px);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+        }
+
+        .nav-links .nav-link {
+          opacity: 0;
+          transform: translateY(15px);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
         }
 
         .nav-cb:checked ~ .nav-links {
-          display: flex;
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+
+        .nav-cb:checked ~ .nav-links .nav-link {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .nav-cb:checked ~ .nav-links .nav-link:nth-child(1) {
+          transition-delay: 0.1s;
+        }
+        .nav-cb:checked ~ .nav-links .nav-link:nth-child(2) {
+          transition-delay: 0.18s;
+        }
+        .nav-cb:checked ~ .nav-links .nav-link:nth-child(3) {
+          transition-delay: 0.26s;
         }
 
         .nav-cta-wrapper {
@@ -929,6 +1045,11 @@
         .hero-watermark-left,
         .hero-watermark-right {
           transform: scale(1.6);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
 
         /* Layout columns wrap */
@@ -953,10 +1074,6 @@
       }
 
       @media (max-width: 480px) {
-        .gallery-grid {
-          column-count: 2;
-        }
-
         .about-chip {
           padding: 8px 16px;
           font-size: 0.76rem;
@@ -982,7 +1099,10 @@
         </a>
 
         <input type="checkbox" id="nav-open" class="nav-cb" />
-        <label for="nav-open" class="nav-burger">≡</label>
+        <label for="nav-open" class="nav-burger">
+          <span class="burger-open">≡</span>
+          <span class="burger-close">✕</span>
+        </label>
 
         <nav class="nav-links">
           <a href="#galeria" class="nav-link" onclick="document.getElementById('nav-open').checked = false">Galeria</a>
@@ -1205,42 +1325,42 @@
 
         <div class="gallery-grid">
           <!-- 1-8: Always visible -->
-          <div class="gallery-item"><img src="https://i.ibb.co/m59hSYwp/673625925-1481138947132812-4770497051028341590-n.jpg" alt="Flower composition 1" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/DDhb08Yx/671777337-1481139010466139-8546070585959303916-n.jpg" alt="Flower composition 2" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/n8KGfMdc/690684959-1498606622052711-8361116883592690525-n.jpg" alt="Flower composition 3" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/VPxdmft/690996815-1499077978672242-185458927302600025-n.jpg" alt="Flower composition 4" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/k2RY5bHB/690633292-1500168715229835-2910511913654894973-n.jpg" alt="Flower composition 5" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/spRB2jCt/692329562-1500168755229831-7754115931865421696-n.jpg" alt="Flower composition 6" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/VWfMjm0q/690685777-1500168745229832-7446741946472221838-n.jpg" alt="Flower composition 7" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item"><img src="https://i.ibb.co/rGrtGzMZ/690664692-1500161311897242-1170510835153177484-n.jpg" alt="Flower composition 8" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item"><a href="#zoom-1"><img src="https://i.ibb.co/m59hSYwp/673625925-1481138947132812-4770497051028341590-n.jpg" alt="Flower composition 1" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-2"><img src="https://i.ibb.co/DDhb08Yx/671777337-1481139010466139-8546070585959303916-n.jpg" alt="Flower composition 2" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-3"><img src="https://i.ibb.co/n8KGfMdc/690684959-1498606622052711-8361116883592690525-n.jpg" alt="Flower composition 3" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-4"><img src="https://i.ibb.co/VPxdmft/690996815-1499077978672242-185458927302600025-n.jpg" alt="Flower composition 4" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-5"><img src="https://i.ibb.co/k2RY5bHB/690633292-1500168715229835-2910511913654894973-n.jpg" alt="Flower composition 5" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-6"><img src="https://i.ibb.co/spRB2jCt/692329562-1500168755229831-7754115931865421696-n.jpg" alt="Flower composition 6" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-7"><img src="https://i.ibb.co/VWfMjm0q/690685777-1500168745229832-7446741946472221838-n.jpg" alt="Flower composition 7" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item"><a href="#zoom-8"><img src="https://i.ibb.co/rGrtGzMZ/690664692-1500161311897242-1170510835153177484-n.jpg" alt="Flower composition 8" class="gallery-img" loading="lazy" /></a></div>
 
           <!-- 9-34: Hidden until expanded (class="gallery-extra") -->
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/ZRfXFtQj/690747196-1500718401841533-2590570400693785980-n.jpg" alt="Flower composition 9" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/DH9pWm9R/696533044-1503542048225835-1311061857064469698-n.jpg" alt="Flower composition 10" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/xtb12cgZ/696941236-1503542058225834-8317735193711663566-n.jpg" alt="Flower composition 11" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/jngpxjw/701437165-1506587167921323-345156310280281627-n.jpg" alt="Flower composition 12" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/vC1tmFQq/701173709-1506587224587984-7954611724330798781-n.jpg" alt="Flower composition 13" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/4wszf7q9/701292855-1506587314587975-8971269090885029357-n.jpg" alt="Flower composition 14" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/ynBR4MjV/701056290-1506587137921326-507565786551534719-n.jpg" alt="Flower composition 15" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/WQKQJwK/704801770-1510453820867991-8144160738459324492-n.jpg" alt="Flower composition 16" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/r2cRBjqw/704507125-1510957734150933-4565255399389898716-n.jpg" alt="Flower composition 17" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/x8RbqqHF/704851691-1510956267484413-5069367878195772634-n.jpg" alt="Flower composition 18" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/TDC3cVgP/705878425-1511252760788097-8420948546502386759-n.jpg" alt="Flower composition 19" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/0pGyvXfZ/705341477-1511252770788096-5329352756437704626-n.jpg" alt="Flower composition 20" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/DN0kn63/705298708-1511251304121576-2630863170677265268-n.jpg" alt="Flower composition 21" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/YBrKZv1q/707561402-1516150330298340-6455755458922446356-n.jpg" alt="Flower composition 22" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/KjMytCDZ/707561398-1516150336965006-4062354868542350324-n.jpg" alt="Flower composition 23" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/KtyfXmD/719993163-1526194335960606-7691637487309658761-n.jpg" alt="Flower composition 24" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/hxYLGBfL/719189581-1526194342627272-860845658635347139-n.jpg" alt="Flower composition 25" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/sJc9cRxk/729167994-1539849157928457-2799154154500316734-n.jpg" alt="Flower composition 26" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/GQBHXmW0/728597880-1539849164595123-4291811548964572311-n.jpg" alt="Flower composition 27" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/VWz32HC9/729115825-1539849191261787-2327039707176743458-n.jpg" alt="Flower composition 28" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/jPvxWTN7/729100650-1539849217928451-6959825167334777907-n.jpg" alt="Flower composition 29" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/XZs8m7nF/729016116-1541361761110530-6157787380783126411-n.jpg" alt="Flower composition 30" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/dwWz1JPx/731843770-1541351884444851-7987032143946935899-n.jpg" alt="Flower composition 31" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/9kpNqBF6/737297570-1548653493714690-3385449930314199352-n.jpg" alt="Flower composition 32" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/whkH2V6R/735456845-1548653380381368-7467488387054346488-n.jpg" alt="Flower composition 33" class="gallery-img" loading="lazy" /></div>
-          <div class="gallery-item gallery-extra"><img src="https://i.ibb.co/spy7x16h/734896675-1548653713714668-2868512842852011399-n.jpg" alt="Flower composition 34" class="gallery-img" loading="lazy" /></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-9"><img src="https://i.ibb.co/ZRfXFtQj/690747196-1500718401841533-2590570400693785980-n.jpg" alt="Flower composition 9" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-10"><img src="https://i.ibb.co/DH9pWm9R/696533044-1503542048225835-1311061857064469698-n.jpg" alt="Flower composition 10" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-11"><img src="https://i.ibb.co/xtb12cgZ/696941236-1503542058225834-8317735193711663566-n.jpg" alt="Flower composition 11" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-12"><img src="https://i.ibb.co/jngpxjw/701437165-1506587167921323-345156310280281627-n.jpg" alt="Flower composition 12" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-13"><img src="https://i.ibb.co/vC1tmFQq/701173709-1506587224587984-7954611724330798781-n.jpg" alt="Flower composition 13" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-14"><img src="https://i.ibb.co/4wszf7q9/701292855-1506587314587975-8971269090885029357-n.jpg" alt="Flower composition 14" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-15"><img src="https://i.ibb.co/ynBR4MjV/701056290-1506587137921326-507565786551534719-n.jpg" alt="Flower composition 15" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-16"><img src="https://i.ibb.co/WQKQJwK/704801770-1510453820867991-8144160738459324492-n.jpg" alt="Flower composition 16" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-17"><img src="https://i.ibb.co/r2cRBjqw/704507125-1510957734150933-4565255399389898716-n.jpg" alt="Flower composition 17" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-18"><img src="https://i.ibb.co/x8RbqqHF/704851691-1510956267484413-5069367878195772634-n.jpg" alt="Flower composition 18" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-19"><img src="https://i.ibb.co/TDC3cVgP/705878425-1511252760788097-8420948546502386759-n.jpg" alt="Flower composition 19" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-20"><img src="https://i.ibb.co/0pGyvXfZ/705341477-1511252770788096-5329352756437704626-n.jpg" alt="Flower composition 20" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-21"><img src="https://i.ibb.co/DN0kn63/705298708-1511251304121576-2630863170677265268-n.jpg" alt="Flower composition 21" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-22"><img src="https://i.ibb.co/YBrKZv1q/707561402-1516150330298340-6455755458922446356-n.jpg" alt="Flower composition 22" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-23"><img src="https://i.ibb.co/KjMytCDZ/707561398-1516150336965006-4062354868542350324-n.jpg" alt="Flower composition 23" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-24"><img src="https://i.ibb.co/KtyfXmD/719993163-1526194335960606-7691637487309658761-n.jpg" alt="Flower composition 24" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-25"><img src="https://i.ibb.co/hxYLGBfL/719189581-1526194342627272-860845658635347139-n.jpg" alt="Flower composition 25" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-26"><img src="https://i.ibb.co/sJc9cRxk/729167994-1539849157928457-2799154154500316734-n.jpg" alt="Flower composition 26" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-27"><img src="https://i.ibb.co/GQBHXmW0/728597880-1539849164595123-4291811548964572311-n.jpg" alt="Flower composition 27" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-28"><img src="https://i.ibb.co/VWz32HC9/729115825-1539849191261787-2327039707176743458-n.jpg" alt="Flower composition 28" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-29"><img src="https://i.ibb.co/jPvxWTN7/729100650-1539849217928451-6959825167334777907-n.jpg" alt="Flower composition 29" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-30"><img src="https://i.ibb.co/XZs8m7nF/729016116-1541361761110530-6157787380783126411-n.jpg" alt="Flower composition 30" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-31"><img src="https://i.ibb.co/dwWz1JPx/731843770-1541351884444851-7987032143946935899-n.jpg" alt="Flower composition 31" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-32"><img src="https://i.ibb.co/9kpNqBF6/737297570-1548653493714690-3385449930314199352-n.jpg" alt="Flower composition 32" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-33"><img src="https://i.ibb.co/whkH2V6R/735456845-1548653380381368-7467488387054346488-n.jpg" alt="Flower composition 33" class="gallery-img" loading="lazy" /></a></div>
+          <div class="gallery-item gallery-extra"><a href="#zoom-34"><img src="https://i.ibb.co/spy7x16h/734896675-1548653713714668-2868512842852011399-n.jpg" alt="Flower composition 34" class="gallery-img" loading="lazy" /></a></div>
         </div>
 
         <label for="gallery-expand" class="gallery-toggle">
@@ -1430,5 +1550,244 @@
       </div>
     </footer>
 
+    <!-- 9. LIGHTBOX ZOOM OVERLAYS -->
+    <div id="zoom-1" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/m59hSYwp/673625925-1481138947132812-4770497051028341590-n.jpg" alt="Zoom 1" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-2" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/DDhb08Yx/671777337-1481139010466139-8546070585959303916-n.jpg" alt="Zoom 2" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-3" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/n8KGfMdc/690684959-1498606622052711-8361116883592690525-n.jpg" alt="Zoom 3" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-4" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/VPxdmft/690996815-1499077978672242-185458927302600025-n.jpg" alt="Zoom 4" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-5" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/k2RY5bHB/690633292-1500168715229835-2910511913654894973-n.jpg" alt="Zoom 5" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-6" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/spRB2jCt/692329562-1500168755229831-7754115931865421696-n.jpg" alt="Zoom 6" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-7" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/VWfMjm0q/690685777-1500168745229832-7446741946472221838-n.jpg" alt="Zoom 7" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-8" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/rGrtGzMZ/690664692-1500161311897242-1170510835153177484-n.jpg" alt="Zoom 8" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-9" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/ZRfXFtQj/690747196-1500718401841533-2590570400693785980-n.jpg" alt="Zoom 9" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-10" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/DH9pWm9R/696533044-1503542048225835-1311061857064469698-n.jpg" alt="Zoom 10" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-11" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/xtb12cgZ/696941236-1503542058225834-8317735193711663566-n.jpg" alt="Zoom 11" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-12" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/jngpxjw/701437165-1506587167921323-345156310280281627-n.jpg" alt="Zoom 12" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-13" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/vC1tmFQq/701173709-1506587224587984-7954611724330798781-n.jpg" alt="Zoom 13" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-14" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/4wszf7q9/701292855-1506587314587975-8971269090885029357-n.jpg" alt="Zoom 14" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-15" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/ynBR4MjV/701056290-1506587137921326-507565786551534719-n.jpg" alt="Zoom 15" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-16" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/WQKQJwK/704801770-1510453820867991-8144160738459324492-n.jpg" alt="Zoom 16" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-17" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/r2cRBjqw/704507125-1510957734150933-4565255399389898716-n.jpg" alt="Zoom 17" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-18" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/x8RbqqHF/704851691-1510956267484413-5069367878195772634-n.jpg" alt="Zoom 18" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-19" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/TDC3cVgP/705878425-1511252760788097-8420948546502386759-n.jpg" alt="Zoom 19" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-20" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/0pGyvXfZ/705341477-1511252770788096-5329352756437704626-n.jpg" alt="Zoom 20" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-21" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/DN0kn63/705298708-1511251304121576-2630863170677265268-n.jpg" alt="Zoom 21" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-22" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/YBrKZv1q/707561402-1516150330298340-6455755458922446356-n.jpg" alt="Zoom 22" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-23" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/KjMytCDZ/707561398-1516150336965006-4062354868542350324-n.jpg" alt="Zoom 23" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-24" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/KtyfXmD/719993163-1526194335960606-7691637487309658761-n.jpg" alt="Zoom 24" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-25" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/hxYLGBfL/719189581-1526194342627272-860845658635347139-n.jpg" alt="Zoom 25" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-26" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/sJc9cRxk/729167994-1539849157928457-2799154154500316734-n.jpg" alt="Zoom 26" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-27" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/GQBHXmW0/728597880-1539849164595123-4291811548964572311-n.jpg" alt="Zoom 27" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-28" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/VWz32HC9/729115825-1539849191261787-2327039707176743458-n.jpg" alt="Zoom 28" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-29" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/jPvxWTN7/729100650-1539849217928451-6959825167334777907-n.jpg" alt="Zoom 29" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-30" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/XZs8m7nF/729016116-1541361761110530-6157787380783126411-n.jpg" alt="Zoom 30" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-31" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/dwWz1JPx/731843770-1541351884444851-7987032143946935899-n.jpg" alt="Zoom 31" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-32" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/9kpNqBF6/737297570-1548653493714690-3385449930314199352-n.jpg" alt="Zoom 32" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-33" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/whkH2V6R/735456845-1548653380381368-7467488387054346488-n.jpg" alt="Zoom 33" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
+    <div id="zoom-34" class="lightbox-overlay">
+      <a href="#galeria" class="lightbox-close-zone"></a>
+      <div class="lightbox-content">
+        <img src="https://i.ibb.co/spy7x16h/734896675-1548653713714668-2868512842852011399-n.jpg" alt="Zoom 34" class="lightbox-img" loading="lazy" />
+        <a href="#galeria" class="lightbox-close-btn">✕</a>
+      </div>
+    </div>
   </body>
 </html>
